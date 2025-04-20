@@ -23,6 +23,9 @@ const CategoryHeader = styled.div`
   height: 100px;
   overflow: hidden;
   background: ${props => props.bgColor || 'var(--primary)'};
+  background-image: ${props => props.bgImage ? `url(${props.bgImage})` : 'none'};
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,8 +38,9 @@ const CategoryHeader = styled.div`
     right: 0;
     bottom: 0;
     background: 
+      ${props => `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
       radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 60%),
-      linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 80%);
+      linear-gradient(to bottom right, ${props.bgColor || 'var(--primary)'}80 0%, ${props.bgColor || 'var(--primary)'}20 80%)`};
     z-index: 1;
   }
   
@@ -106,7 +110,7 @@ const StatValue = styled.span`
 `;
 
 const CategoryCard = ({ category }) => {
-  const { id, name, description, icon, color, threadCount, memberCount } = category;
+  const { id, name, description, icon, color, threadCount, memberCount, backgroundImage } = category;
   
   return (
     <CategoryCardContainer
@@ -114,7 +118,7 @@ const CategoryCard = ({ category }) => {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <Link to={`/categories/${id}`} style={{ textDecoration: 'none', color: 'inherit', height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <CategoryHeader bgColor={color}>
+        <CategoryHeader bgColor={color} bgImage={backgroundImage}>
           <CategoryIcon>{icon}</CategoryIcon>
         </CategoryHeader>
         

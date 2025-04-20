@@ -6,6 +6,7 @@ import { NeonHeading, Card, Button, Avatar, Badge } from '../components/common/S
 import HeroSection from '../components/forum/HeroSection';
 import CategoryGrid from '../components/forum/CategoryGrid';
 import ThreadList from '../components/forum/ThreadList';
+import CategoryCard from '../components/forum/CategoryCard';
 import { threads, categories, users } from '../data/mockData';
 
 // Material UI Icons
@@ -300,6 +301,13 @@ const Tab = styled.button`
     margin-right: 0.5rem;
     vertical-align: middle;
   }
+`;
+
+const CategoriesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 `;
 
 // Generate mock community stats
@@ -682,7 +690,11 @@ const HomePage = () => {
           <h2>Popular Categories</h2>
           <ViewAllLink to="/categories">View All Categories</ViewAllLink>
         </SectionHeading>
-        <CategoryGrid categories={categories.slice(0, 6)} />
+        <CategoriesGrid>
+          {categories.slice(0, 6).map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
+        </CategoriesGrid>
       </section>
     </HomePageContainer>
   );
