@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { theme } from './styles/theme';
 import GlobalStyles from './styles/globalStyles';
 import MainLayout from './components/layout/MainLayout';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -30,6 +31,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
